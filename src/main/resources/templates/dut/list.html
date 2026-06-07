@@ -1,26 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<div class="container">
 
 <body>
 <link rel="stylesheet" href="/css/app.css">
-<div class="header">
-<h2>DUT Servers</h2>
-</div>
 
-<div class="nav">
-    <a href="/dashboard">Home</a>
-    <a href="/duts">DUT Servers</a>
-    <a href="/generators">Load Generators</a>
-    <a href="/test-configs">Test Configurations</a>
-    <a href="/scenarios">Scenarios</a>
-    <a href="/campaigns">Campaigns</a>
-    <a href="/monitor">Monitor</a>
-    <a href="/users">Users</a>
-    <a href="/logout">Logout</a>
-</div>
+<div th:replace="~{fragments/layout :: header}"></div>
 
-
-<hr>
 <a href="/duts/new">
     Add DUT
 </a>
@@ -42,4 +28,5 @@
 </table>
 
 </body>
+</div>
 </html>

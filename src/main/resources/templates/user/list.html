@@ -6,21 +6,11 @@
     <title>Users</title>
 </head>
 
+<div class="container">
+
 <body>
+<div th:replace="~{fragments/layout :: header}"></div>
 
-<div class="nav">
-    <a href="/dashboard">Home</a>
-    <a href="/duts">DUT Servers</a>
-    <a href="/generators">Load Generators</a>
-    <a href="/test-configs">Test Configurations</a>
-    <a href="/scenarios">Scenarios</a>
-    <a href="/campaigns">Campaigns</a>
-    <a href="/monitor">Monitor</a>
-    <a href="/users">Users</a>
-    <a href="/logout">Logout</a>
-</div>
-
-<hr>
 
 <h2>User Management</h2>
 
@@ -43,4 +33,5 @@
 </table>
 
 </body>
+</div>
 </html>

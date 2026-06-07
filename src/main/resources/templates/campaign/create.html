@@ -1,22 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<div class="container">
 
 <body>
 <link rel="stylesheet" href="/css/app.css">
-<div class="nav">
-    <a href="/dashboard">Home</a>
-    <a href="/duts">DUT Servers</a>
-    <a href="/generators">Load Generators</a>
-    <a href="/test-configs">Test Configurations</a>
-    <a href="/scenarios">Scenarios</a>
-    <a href="/campaigns">Campaigns</a>
-    <a href="/monitor">Monitor</a>
-    <a href="/users">Users</a>
-    <a href="/logout">Logout</a>
-</div>
-
-
-<hr>
+<div th:replace="~{fragments/layout :: header}"></div>
 
 <h2>Create Campaign</h2>
 
@@ -81,4 +69,5 @@ Save Campaign
 </form>
 
 </body>
+</div>
 </html>

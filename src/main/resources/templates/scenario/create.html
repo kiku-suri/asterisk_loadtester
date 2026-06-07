@@ -4,23 +4,13 @@
 <link rel="stylesheet" href="/css/app.css">
 <title>Upload Scenario</title>
 </head>
+
+<div class="container">
+
 <body>
 
-<div class="header">
-<h2>Upload SIPp Scenario</h2>
-</div>
+<div th:replace="~{fragments/layout :: header}"></div>
 
-<div class="nav">
-    <a href="/dashboard">Home</a>
-    <a href="/duts">DUT Servers</a>
-    <a href="/generators">Load Generators</a>
-    <a href="/test-configs">Test Configurations</a>
-    <a href="/scenarios">Scenarios</a>
-    <a href="/campaigns">Campaigns</a>
-    <a href="/monitor">Monitor</a>
-    <a href="/users">Users</a>
-    <a href="/logout">Logout</a>
-</div>
 <form
         method="post"
         enctype="multipart/form-data">
@@ -52,4 +42,5 @@
 <br/>
 
 </body>
+</div>
 </html>

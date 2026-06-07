@@ -5,27 +5,11 @@
 <link rel="stylesheet" href="/css/app.css">
     <title>Load Generators</title>
 </head>
+<div class="container">
 
 <body>
 
-<div class="header">
-<h2>Load Generator Servers</h2>
-</div>
-
-<div class="nav">
-    <a href="/dashboard">Home</a>
-    <a href="/duts">DUT Servers</a>
-    <a href="/generators">Load Generators</a>
-    <a href="/test-configs">Test Configurations</a>
-    <a href="/scenarios">Scenarios</a>
-    <a href="/campaigns">Campaigns</a>
-    <a href="/monitor">Monitor</a>
-    <a href="/users">Users</a>
-    <a href="/logout">Logout</a>
-</div>
-
-
-<hr>
+<div th:replace="~{fragments/layout :: header}"></div>
 
 <p th:if="${success}" th:text="${success}" style="color:green;"></p>
 <p th:if="${error}" th:text="${error}" style="color:red;"></p>
@@ -70,4 +54,5 @@
 </table>
 
 </body>
+</div>
 </html>

@@ -7,22 +7,7 @@
 </head>
 
 <body>
-
-<div class="header">
-    <h2>Asterisk Load Testing Platform</h2>
-</div>
-
-<div class="nav">
-    <a href="/dashboard">Home</a>
-    <a href="/duts">DUT Servers</a>
-    <a href="/generators">Load Generators</a>
-    <a href="/test-configs">Test Configurations</a>
-    <a href="/scenarios">Scenarios</a>
-    <a href="/campaigns">Campaigns</a>
-    <a href="/monitor">Monitor</a>
-    <a href="/users">Users</a>
-    <a href="/logout">Logout</a>
-</div>
+<div th:replace="~{fragments/layout :: header}"></div>
 
 <div class="container">
 
@@ -48,7 +33,6 @@
         Create Campaign
     </a>
 
-</div>
 
 <h3>Campaign Status</h3>
 
@@ -95,6 +79,7 @@
 </table>
 
 
+</div>
 
 </body>
 </html>
