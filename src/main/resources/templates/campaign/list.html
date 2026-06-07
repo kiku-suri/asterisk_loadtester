@@ -1,75 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
+<head>
+    <title>Campaign Management</title>
+</head>
+
 <body>
 
+<h2>Campaign Management</h2>
+
 <div>
-<a href="/dashboard">Home</a> |
-<a href="/campaigns">Campaigns</a> |
-<a href="/duts">DUT</a> |
-<a href="/generators">Generators</a> |
-<a href="/test-configs">Configurations</a> |
-<a href="/users">Users</a> |
-<a href="/logout">Logout</a>
+    <a href="/dashboard">Home</a> |
+    <a href="/campaigns">Campaigns</a> |
+    <a href="/duts">DUT Servers</a> |
+    <a href="/generators">Load Generators</a> |
+    <a href="/test-configs">Test Configurations</a> |
+    <a href="/scenarios">Scenarios</a> |
+    <a href="/users">Users</a> |
+    <a href="/logout">Logout</a>
 </div>
 
 <hr>
 
-<h2>Campaigns</h2>
-
-<a href="/campaigns/new">
-Create Campaign
-</a>
+<a href="/campaigns/new">Create Campaign</a>
 
 <br><br>
 
 <table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>DUT</th>
+        <th>Generator</th>
+        <th>Config</th>
+        <th>Scenario</th>
+        <th>Status</th>
+        <th>PID</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Action</th>
+    </tr>
 
-<tr>
-<th>ID</th>
-<th>Name</th>
-<th>DUT</th>
-<th>Generator</th>
-<th>Config</th>
-<th>Status</th>
-<th>Action</th>
-<th>Status</th>
-<th>PID</th>
-<th>Started</th>
-</tr>
+    <tr th:each="c : ${campaigns}">
+        <td th:text="${c.campaignId}"></td>
+        <td th:text="${c.campaignName}"></td>
 
-<tr th:each="c : ${campaigns}">
-<td th:text="${c.campaignId}"></td>
-<td th:text="${c.campaignName}"></td>
-<td th:text="${c.dutServer.serverName}"></td>
-<td th:text="${c.loadGenerator.serverName}"></td>
-<td th:text="${c.testConfiguration.testName}"></td>
-<td th:text="${c.status}"></td>
-<td>
+        <td th:text="${c.dutServer != null ? c.dutServer.serverName : '-'}"></td>
+        <td th:text="${c.loadGenerator != null ? c.loadGenerator.serverName : '-'}"></td>
+        <td th:text="${c.testConfiguration != null ? c.testConfiguration.testName : '-'}"></td>
+        <td th:text="${c.scenario != null ? c.scenario.scenarioName : '-'}"></td>
 
-<td>
-    <a th:href="@{/monitor/{id}(id=${c.campaignId})}">
-    Monitor
-    </a>
-    <a th:href="@{/campaigns/start/{id}(id=${c.campaignId})}">
-        Start
-    </a>
+        <td th:text="${c.status}"></td>
+        <td th:text="${c.sippPid}"></td>
+        <td th:text="${c.startTime}"></td>
+        <td th:text="${c.endTime}"></td>
 
-    |
-
-    <a th:href="@{/campaigns/stop/{id}(id=${campaign.campaignId})}">
-        Stop
-    </a>
-
-</td>
-
-
-<td th:text="${campaign.status}"></td>
-<td th:text="${campaign.sippPid}"></td>
-<td th:text="${campaign.startTime}"></td>
-
-</tr>
-
+        <td>
+            <a th:href="@{/campaigns/start/{id}(id=${c.campaignId})}">Start</a>
+            |
+            <a th:href="@{/campaigns/stop/{id}(id=${c.campaignId})}">Stop</a>
+            |
+            <a th:href="@{/monitor/{id}(id=${c.campaignId})}">Monitor</a>
+            |
+            <a th:href="@{/statistics/{id}(id=${c.campaignId})}">Stats</a>
+        </td>
+    </tr>
 </table>
 
 </body>

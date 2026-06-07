@@ -19,17 +19,11 @@
 </div>
 
 <hr>
-<a href="/generators/new">
-    Add Load Generator
-</a>
 
-<td>
+<p th:if="${success}" th:text="${success}" style="color:green;"></p>
+<p th:if="${error}" th:text="${error}" style="color:red;"></p>
 
-    <a th:href="@{/generators/validate/{id}(id=${g.generatorId})}">
-        Validate
-    </a>
-
-</td>
+<a href="/generators/new">Add Load Generator</a>
 
 <br><br>
 
@@ -39,6 +33,8 @@
     <th>ID</th>
     <th>Name</th>
     <th>IP Address</th>
+    <th>SSH Port</th>
+    <th>SSH User</th>
     <th>Max Calls</th>
     <th>Status</th>
     <th>Action</th>
@@ -48,11 +44,17 @@
     <td th:text="${g.generatorId}"></td>
     <td th:text="${g.serverName}"></td>
     <td th:text="${g.ipAddress}"></td>
+    <td th:text="${g.sshPort}"></td>
+    <td th:text="${g.sshUsername}"></td>
     <td th:text="${g.maxCalls}"></td>
     <td th:text="${g.status}"></td>
 
     <td>
-        <a th:href="@{'/generators/delete/' + ${g.generatorId}}">
+        <a th:href="@{/generators/validate/{id}(id=${g.generatorId})}">
+            Validate
+        </a>
+        |
+        <a th:href="@{/generators/delete/{id}(id=${g.generatorId})}">
             Delete
         </a>
     </td>
