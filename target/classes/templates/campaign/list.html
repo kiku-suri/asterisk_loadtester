@@ -33,6 +33,9 @@ Create Campaign
 <th>Config</th>
 <th>Status</th>
 <th>Action</th>
+<th>Status</th>
+<th>PID</th>
+<th>Started</th>
 </tr>
 
 <tr th:each="c : ${campaigns}">
@@ -45,10 +48,10 @@ Create Campaign
 <td>
 
 <td>
-    <a th:href="@{/monitor/{id}(id=${campaign.campaignId})}">
+    <a th:href="@{/monitor/{id}(id=${c.campaignId})}">
     Monitor
     </a>
-    <a th:href="@{/campaigns/start/{id}(id=${campaign.campaignId})}">
+    <a th:href="@{/campaigns/start/{id}(id=${c.campaignId})}">
         Start
     </a>
 
@@ -60,9 +63,6 @@ Create Campaign
 
 </td>
 
-<th>Status</th>
-<th>PID</th>
-<th>Started</th>
 
 <td th:text="${campaign.status}"></td>
 <td th:text="${campaign.sippPid}"></td>

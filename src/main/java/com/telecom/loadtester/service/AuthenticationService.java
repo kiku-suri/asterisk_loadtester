@@ -34,25 +34,25 @@ public class AuthenticationService {
         String username,
         String password) {
 
-    System.out.println("================================");
-    System.out.println("LOGIN ATTEMPT");
-    System.out.println("Username: " + username);
+   // System.out.println("================================");
+   // System.out.println("LOGIN ATTEMPT");
+   // System.out.println("Username: " + username);
 
     return userRepository
             .findByUsername(username)
             .map(user -> {
 
-                System.out.println("User Found");
-                System.out.println("DB Username: " + user.getUsername());
-                System.out.println("Enabled: " + user.getEnabled());
-                System.out.println("Hash: " + user.getPasswordHash());
+            //    System.out.println("User Found");
+            //    System.out.println("DB Username: " + user.getUsername());
+            //    System.out.println("Enabled: " + user.getEnabled());
+            //    System.out.println("Hash: " + user.getPasswordHash());
 
                 boolean match =
                         passwordEncoder.matches(
                                 password,
                                 user.getPasswordHash());
 
-                System.out.println("Password Match: " + match);
+             //   System.out.println("Password Match: " + match);
 
                 return Boolean.TRUE.equals(
                         user.getEnabled())
@@ -60,7 +60,7 @@ public class AuthenticationService {
             })
             .orElseGet(() -> {
 
-                System.out.println("User Not Found");
+             //   System.out.println("User Not Found");
 
                 return false;
             });

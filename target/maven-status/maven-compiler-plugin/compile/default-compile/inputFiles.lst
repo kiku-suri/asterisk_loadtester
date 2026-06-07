@@ -15,7 +15,6 @@
 /opt/loadtester/source/loadtester-project/src/main/java/com/telecom/loadtester/model/CallRecord.java
 /opt/loadtester/source/loadtester-project/src/main/java/com/telecom/loadtester/model/CampaignMonitor.java
 /opt/loadtester/source/loadtester-project/src/main/java/com/telecom/loadtester/model/CampaignStatistics.java
-/opt/loadtester/source/loadtester-project/src/main/java/com/telecom/loadtester/model/CommandResult.java
 /opt/loadtester/source/loadtester-project/src/main/java/com/telecom/loadtester/model/DutServer.java
 /opt/loadtester/source/loadtester-project/src/main/java/com/telecom/loadtester/model/ExtensionMaster.java
 /opt/loadtester/source/loadtester-project/src/main/java/com/telecom/loadtester/model/JobExecutionLog.java

@@ -60,13 +60,5 @@ public class LoginController {
         return "redirect:/login";
     }
 
-    @GetMapping("/test")
-	@ResponseBody
-	public String test() {
-
-    	System.out.println("TEST ENDPOINT HIT");
-
-    	return "Controller Works";
-	}
 
 }

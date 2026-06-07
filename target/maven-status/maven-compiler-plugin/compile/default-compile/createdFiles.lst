@@ -56,7 +56,6 @@ com/telecom/loadtester/controller/TestConfigurationController.class
 com/telecom/loadtester/model/ReportExport.class
 com/telecom/loadtester/repository/CallRecordRepository.class
 com/telecom/loadtester/controller/LoadGeneratorController.class
-com/telecom/loadtester/model/CommandResult.class
 com/telecom/loadtester/security/SecurityConfig.class
 com/telecom/loadtester/model/CampaignMonitor.class
 com/telecom/loadtester/controller/LoginController.class
