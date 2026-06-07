@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Campaign Statistics</title>
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body>
+
+<div class="header">
+    <h2>Asterisk Load Testing Platform</h2>
+</div>
+
+<div class="nav">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/duts">DUT Servers</a>
+    <a href="/generators">Load Generators</a>
+    <a href="/scenarios">Scenarios</a>
+    <a href="/test-configs">Test Configurations</a>
+    <a href="/campaigns">Campaigns</a>
+    <a href="/monitor">Monitor</a>
+    <a href="/users">Users</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="container">
+
+    <h2 class="page-title">Campaign Statistics</h2>
+
+    <a class="btn" th:href="@{/campaign-statistics/{id}/collect(id=${campaignId})}">
+        Collect Latest Statistics
+    </a>
+
+    <a class="btn btn-secondary" href="/campaigns">
+        Back to Campaigns
+    </a>
+
+    <h3>Call Status Summary</h3>
+
+    <table>
+        <tr>
+            <th>Collected</th>
+            <th>Total Calls</th>
+            <th>Success</th>
+            <th>Failed</th>
+            <th>Busy</th>
+            <th>No Answer</th>
+            <th>Error</th>
+            <th>Success Rate</th>
+        </tr>
+
+        <tr th:each="s : ${callStatus}">
+            <td th:text="${s.collectedAt}"></td>
+            <td th:text="${s.totalCalls}"></td>
+            <td th:text="${s.successCalls}"></td>
+            <td th:text="${s.failedCalls}"></td>
+            <td th:text="${s.busyCalls}"></td>
+            <td th:text="${s.noAnswerCalls}"></td>
+            <td th:text="${s.errorCalls}"></td>
+            <td th:text="${s.successRate}"></td>
+        </tr>
+    </table>
+
+    <h3>System Resource Metrics</h3>
+
+    <table>
+        <tr>
+            <th>Collected</th>
+            <th>Server Type</th>
+            <th>Server IP</th>
+            <th>CPU %</th>
+            <th>Memory %</th>
+            <th>Disk %</th>
+            <th>Load Avg</th>
+            <th>Active Calls / SIPp Proc</th>
+        </tr>
+
+        <tr th:each="m : ${resourceMetrics}">
+            <td th:text="${m.collectedAt}"></td>
+            <td th:text="${m.serverType}"></td>
+            <td th:text="${m.serverIp}"></td>
+            <td th:text="${m.cpuUsage}"></td>
+            <td th:text="${m.memoryUsage}"></td>
+            <td th:text="${m.diskUsage}"></td>
+            <td th:text="${m.loadAverage}"></td>
+            <td th:text="${m.activeCalls}"></td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>
