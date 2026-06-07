@@ -2,17 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
-
+<link rel="stylesheet" href="/css/app.css">
+<div class="header">
 <h2>DUT Servers</h2>
+</div>
 
-<div>
-    <a href="/dashboard">Home</a> |
-    <a href="/duts">DUT Servers</a> |
-    <a href="/generators">Load Generators</a> |
-    <a href="/test-configs">Test Configurations</a> |
-    <a href="/users">Users</a> |
+<div class="nav">
+    <a href="/dashboard">Home</a>
+    <a href="/duts">DUT Servers</a>
+    <a href="/generators">Load Generators</a>
+    <a href="/test-configs">Test Configurations</a>
+    <a href="/scenarios">Scenarios</a>
+    <a href="/campaigns">Campaigns</a>
+    <a href="/monitor">Monitor</a>
+    <a href="/users">Users</a>
     <a href="/logout">Logout</a>
 </div>
+
 
 <hr>
 <a href="/duts/new">

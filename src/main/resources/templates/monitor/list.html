@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Campaign Monitor</title>
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body>
+
+<div class="header">
+    <h2>Asterisk Load Testing Platform</h2>
+</div>
+
+<div class="nav">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/duts">DUT Servers</a>
+    <a href="/generators">Load Generators</a>
+    <a href="/scenarios">Scenarios</a>
+    <a href="/test-configs">Test Configurations</a>
+    <a href="/campaigns">Campaigns</a>
+    <a href="/monitor">Monitor</a>
+    <a href="/users">Users</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="container">
+
+    <h2 class="page-title">Campaign Monitor</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Campaign</th>
+            <th>Status</th>
+            <th>PID</th>
+            <th>Start Time</th>
+            <th>Action</th>
+        </tr>
+
+        <tr th:each="c : ${campaigns}">
+            <td th:text="${c.campaignId}"></td>
+            <td th:text="${c.campaignName}"></td>
+            <td th:text="${c.status}"></td>
+            <td th:text="${c.sippPid}"></td>
+            <td th:text="${c.startTime}"></td>
+            <td>
+                <a class="btn"
+                   th:href="@{/monitor/{id}(id=${c.campaignId})}">
+                    View Monitor
+                </a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>

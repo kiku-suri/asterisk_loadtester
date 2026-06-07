@@ -1,0 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    color: #222;
+}
+
+.header {
+    background: #1f2937;
+    color: white;
+    padding: 16px 30px;
+}
+
+.header h2 {
+    margin: 0;
+}
+
+.nav {
+    background: #374151;
+    padding: 10px 30px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 18px;
+    font-weight: bold;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    margin: 30px;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.page-title {
+    margin-top: 0;
+    color: #111827;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background: #dc2626;
+}
+
+.btn-success {
+    background: #16a34a;
+}
+
+.btn-secondary {
+    background: #6b7280;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+}
+
+th {
+    background: #e5e7eb;
+    text-align: left;
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+tr:hover {
+    background: #f9fafb;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 9px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.alert-success {
+    color: #166534;
+    background: #dcfce7;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.alert-error {
+    color: #991b1b;
+    background: #fee2e2;
+    padding: 10px;
+    border-radius: 5px;
+}

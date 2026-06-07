@@ -23,6 +23,16 @@ public class CampaignMonitorController {
         this.monitorService = monitorService;
     }
 
+    @GetMapping
+    public String list(Model model) {
+
+        model.addAttribute(
+                "campaigns",
+                campaignService.findAll());
+
+        return "monitor/list";
+    }
+
     @GetMapping("/{id}")
     public String monitor(
             @PathVariable Long id,
@@ -32,13 +42,11 @@ public class CampaignMonitorController {
                 campaignService.findById(id);
 
         model.addAttribute(
-                "campaign",
-                campaign);
+                "campaign", campaign);
 
         model.addAttribute(
                 "monitor",
-                monitorService.getMonitorData(
-                        campaign));
+                monitorService.getMonitorData(campaign));
 
         return "monitor/dashboard";
     }
