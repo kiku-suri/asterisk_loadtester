@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Campaign Statistics</title>
+</head>
+<body>
+
+<h2>Campaign Statistics</h2>
+
+<a href="/campaigns">Back</a>
+
+<h3>Summary</h3>
+
+<table border="1">
+
+<tr>
+    <th>Total</th>
+    <th>Success</th>
+    <th>Failed</th>
+    <th>CPS</th>
+</tr>
+
+<tr th:each="s : ${stats}">
+    <td th:text="${s.totalCalls}"></td>
+    <td th:text="${s.successfulCalls}"></td>
+    <td th:text="${s.failedCalls}"></td>
+    <td th:text="${s.cps}"></td>
+</tr>
+
+</table>
+
+<h3>Call Records</h3>
+
+<table border="1">
+
+<tr>
+    <th>ID</th>
+    <th>Response</th>
+    <th>Result</th>
+</tr>
+
+<tr th:each="c : ${calls}">
+    <td th:text="${c.recordId}"></td>
+    <td th:text="${c.responseCode}"></td>
+    <td th:text="${c.callResult}"></td>
+</tr>
+
+</table>
+
+</body>
+</html>

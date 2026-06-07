@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div>
+    <a href="/dashboard">Home</a> |
+    <a href="/duts">DUT Servers</a> |
+    <a href="/generators">Load Generators</a> |
+    <a href="/test-configs">Test Configurations</a> |
+    <a href="/users">Users</a> |
+    <a href="/logout">Logout</a>
+</div>
+
+<hr>
+<h2>Add DUT</h2>
+
+<form action="/duts"
+      method="post">
+
+    <input type="text"
+           name="serverName"
+           placeholder="Server Name">
+
+    <input type="text"
+           name="ipAddress"
+           placeholder="IP Address">
+
+    <button type="submit">
+        Save
+    </button>
+
+</form>
+
+</body>
+</html>

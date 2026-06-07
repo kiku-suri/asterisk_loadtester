@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Load Generators</title>
+</head>
+
+<body>
+
+<h2>Load Generator Servers</h2>
+
+<div>
+    <a href="/dashboard">Home</a> |
+    <a href="/duts">DUT Servers</a> |
+    <a href="/generators">Load Generators</a> |
+    <a href="/test-configs">Test Configurations</a> |
+    <a href="/users">Users</a> |
+    <a href="/logout">Logout</a>
+</div>
+
+<hr>
+<a href="/generators/new">
+    Add Load Generator
+</a>
+
+<td>
+
+    <a th:href="@{/generators/validate/{id}(id=${generator.generatorId})}">
+        Validate
+    </a>
+
+</td>
+
+<br><br>
+
+<table border="1">
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>IP Address</th>
+    <th>Max Calls</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+<tr th:each="g : ${generators}">
+    <td th:text="${g.generatorId}"></td>
+    <td th:text="${g.serverName}"></td>
+    <td th:text="${g.ipAddress}"></td>
+    <td th:text="${g.maxCalls}"></td>
+    <td th:text="${g.status}"></td>
+
+    <td>
+        <a th:href="@{'/generators/delete/' + ${g.generatorId}}">
+            Delete
+        </a>
+    </td>
+</tr>
+
+</table>
+
+</body>
+</html>

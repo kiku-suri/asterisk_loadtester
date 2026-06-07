@@ -1,0 +1,44 @@
+package com.telecom.loadtester.controller;
+
+import com.telecom.loadtester.model.LoadGenerator;
+import com.telecom.loadtester.repository.LoadGeneratorRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+@RequiredArgsConstructor
+public class LoadGeneratorController {
+
+    private final LoadGeneratorRepository repository;
+
+    @GetMapping("/generators")
+    public String list(Model model) {
+
+        model.addAttribute(
+                "generators",
+                repository.findAll());
+
+        return "generator/list";
+    }
+
+    @GetMapping("/generators/new")
+    public String createForm(Model model) {
+
+        model.addAttribute(
+                "generator",
+                new LoadGenerator());
+
+        return "generator/create";
+    }
+
+    @PostMapping("/generators")
+    public String save(
+            @ModelAttribute LoadGenerator generator) {
+
+        repository.save(generator);
+
+        return "redirect:/generators";
+    }
+}

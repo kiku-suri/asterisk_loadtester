@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Scenario Management</title>
+</head>
+<body>
+
+<h2>Scenario Management</h2>
+
+<a href="/scenarios/new">
+    Upload Scenario
+</a>
+
+<table border="1">
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>File</th>
+    <th>Deploy</th>
+</tr>
+
+<tr th:each="scenario : ${scenarios}">
+    <td th:text="${scenario.scenarioId}"></td>
+    <td th:text="${scenario.scenarioName}"></td>
+    <td th:text="${scenario.fileName}"></td>
+
+    <td>
+        Deploy
+    </td>
+</tr>
+
+</table>
+
+<br/>
+<a href="/dashboard">Home</a>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div>
+    <a href="/dashboard">Home</a> |
+    <a href="/duts">DUT Servers</a> |
+    <a href="/generators">Load Generators</a> |
+    <a href="/test-configs">Test Configurations</a> |
+    <a href="/users">Users</a> |
+    <a href="/logout">Logout</a>
+</div>
+
+<hr>
+
+<h2>Create Test Configuration</h2>
+
+<form action="/test-configs"
+      method="post">
+
+    <label>Test Name</label>
+    <input type="text"
+           name="testName">
+
+    <br><br>
+
+    <label>Call Count</label>
+    <input type="number"
+           name="callCount">
+
+    <br><br>
+
+    <label>CPS</label>
+    <input type="number"
+           name="cps">
+
+    <br><br>
+
+    <label>Duration (Seconds)</label>
+    <input type="number"
+           name="durationSeconds">
+
+    <br><br>
+
+    <button type="submit">
+        Save
+    </button>
+
+</form>
+
+</body>
+</html>

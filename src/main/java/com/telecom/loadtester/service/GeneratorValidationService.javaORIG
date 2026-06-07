@@ -1,0 +1,31 @@
+package com.telecom.loadtester.service;
+
+import com.telecom.loadtester.model.LoadGenerator;
+import org.springframework.stereotype.Service;
+
+@Service
+public class GeneratorValidationService {
+
+    private final SshExecutionService ssh;
+
+    public GeneratorValidationService(
+            SshExecutionService ssh) {
+
+        this.ssh = ssh;
+    }
+
+    public boolean isSippInstalled(
+            LoadGenerator generator) {
+
+        String output =
+                ssh.executeCommand(
+                        generator.getIpAddress(),
+                        generator.getSshPort(),
+                        generator.getSshUsername(),
+                        generator.getSshPassword(),
+                        "which sipp");
+
+        return output.contains(
+                "/sipp");
+    }
+}

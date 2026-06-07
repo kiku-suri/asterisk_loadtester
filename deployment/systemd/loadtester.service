@@ -1,0 +1,28 @@
+[Unit]
+Description=Asterisk Load Testing Platform
+After=network.target mysql.service
+
+[Service]
+
+Type=simple
+
+User=root
+
+WorkingDirectory=/opt/loadtester/app
+
+ExecStart=/usr/bin/java \
+-Xms512m \
+-Xmx2048m \
+-jar /opt/loadtester/app/loadtester.jar
+
+Restart=always
+
+RestartSec=10
+
+StandardOutput=append:/opt/loadtester/logs/application/systemd.log
+
+StandardError=append:/opt/loadtester/logs/application/systemd-error.log
+
+[Install]
+
+WantedBy=multi-user.target

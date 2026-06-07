@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<h2>DUT Servers</h2>
+
+<div>
+    <a href="/dashboard">Home</a> |
+    <a href="/duts">DUT Servers</a> |
+    <a href="/generators">Load Generators</a> |
+    <a href="/test-configs">Test Configurations</a> |
+    <a href="/users">Users</a> |
+    <a href="/logout">Logout</a>
+</div>
+
+<hr>
+<a href="/duts/new">
+    Add DUT
+</a>
+
+<table border="1">
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>IP</th>
+</tr>
+
+<tr th:each="dut : ${duts}">
+    <td th:text="${dut.dutId}"></td>
+    <td th:text="${dut.serverName}"></td>
+    <td th:text="${dut.ipAddress}"></td>
+</tr>
+
+</table>
+
+</body>
+</html>

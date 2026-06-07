@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Campaign Details</title>
+
+<meta http-equiv="refresh" content="5"/>
+
+</head>
+
+<body>
+
+<h2>Campaign Details</h2>
+
+<a href="/monitor">Back</a>
+
+<hr/>
+
+<p>
+Campaign :
+<span th:text="${campaign.campaignName}"></span>
+</p>
+
+<p>
+Status :
+<span th:text="${campaign.status}"></span>
+</p>
+
+<p>
+PID :
+<span th:text="${campaign.sippPid}"></span>
+</p>
+
+<p>
+Start :
+<span th:text="${campaign.startTime}"></span>
+</p>
+
+<p>
+End :
+<span th:text="${campaign.endTime}"></span>
+</p>
+
+<p>
+Result File :
+<span th:text="${campaign.resultFile}"></span>
+</p>
+
+</body>
+</html>

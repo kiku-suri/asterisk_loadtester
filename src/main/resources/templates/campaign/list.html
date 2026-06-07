@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div>
+<a href="/dashboard">Home</a> |
+<a href="/campaigns">Campaigns</a> |
+<a href="/duts">DUT</a> |
+<a href="/generators">Generators</a> |
+<a href="/test-configs">Configurations</a> |
+<a href="/users">Users</a> |
+<a href="/logout">Logout</a>
+</div>
+
+<hr>
+
+<h2>Campaigns</h2>
+
+<a href="/campaigns/new">
+Create Campaign
+</a>
+
+<br><br>
+
+<table border="1">
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>DUT</th>
+<th>Generator</th>
+<th>Config</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+<tr th:each="c : ${campaigns}">
+<td th:text="${c.campaignId}"></td>
+<td th:text="${c.campaignName}"></td>
+<td th:text="${c.dutServer.serverName}"></td>
+<td th:text="${c.loadGenerator.serverName}"></td>
+<td th:text="${c.testConfiguration.testName}"></td>
+<td th:text="${c.status}"></td>
+<td>
+
+<td>
+    <a th:href="@{/monitor/{id}(id=${campaign.campaignId})}">
+    Monitor
+    </a>
+    <a th:href="@{/campaigns/start/{id}(id=${campaign.campaignId})}">
+        Start
+    </a>
+
+    |
+
+    <a th:href="@{/campaigns/stop/{id}(id=${campaign.campaignId})}">
+        Stop
+    </a>
+
+</td>
+
+<th>Status</th>
+<th>PID</th>
+<th>Started</th>
+
+<td th:text="${campaign.status}"></td>
+<td th:text="${campaign.sippPid}"></td>
+<td th:text="${campaign.startTime}"></td>
+
+</tr>
+
+</table>
+
+</body>
+</html>

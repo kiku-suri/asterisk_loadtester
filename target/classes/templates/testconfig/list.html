@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div>
+    <a href="/dashboard">Home</a> |
+    <a href="/duts">DUT Servers</a> |
+    <a href="/generators">Load Generators</a> |
+    <a href="/test-configs">Test Configurations</a> |
+    <a href="/users">Users</a> |
+    <a href="/logout">Logout</a>
+</div>
+
+<hr>
+
+<h2>Test Configurations</h2>
+
+<a href="/test-configs/new">
+Create Configuration
+</a>
+
+<br><br>
+
+<table border="1">
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Calls</th>
+    <th>CPS</th>
+    <th>Duration</th>
+</tr>
+
+<tr th:each="cfg : ${configs}">
+    <td th:text="${cfg.testConfigId}"></td>
+    <td th:text="${cfg.testName}"></td>
+    <td th:text="${cfg.callCount}"></td>
+    <td th:text="${cfg.cps}"></td>
+    <td th:text="${cfg.durationSeconds}"></td>
+</tr>
+
+</table>
+
+</body>
+</html>

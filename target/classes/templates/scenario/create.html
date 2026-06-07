@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Upload Scenario</title>
+</head>
+<body>
+
+<h2>Upload SIPp Scenario</h2>
+
+<form
+        method="post"
+        enctype="multipart/form-data">
+
+    <label>Name</label>
+    <input type="text"
+           name="scenarioName"/>
+
+    <br/><br/>
+
+    <label>Description</label>
+    <input type="text"
+           name="description"/>
+
+    <br/><br/>
+
+    <label>XML File</label>
+    <input type="file"
+           name="file"/>
+
+    <br/><br/>
+
+    <button type="submit">
+        Upload
+    </button>
+
+</form>
+
+<br/>
+<a href="/dashboard">Home</a>
+
+</body>
+</html>

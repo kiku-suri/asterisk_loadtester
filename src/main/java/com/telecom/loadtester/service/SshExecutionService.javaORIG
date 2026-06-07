@@ -1,0 +1,97 @@
+package com.telecom.loadtester.service;
+
+import com.jcraft.jsch.*;
+import org.springframework.stereotype.Service;
+
+import java.io.InputStream;
+
+@Service
+public class SshExecutionService {
+
+    public String executeCommand(
+            String host,
+            Integer port,
+            String username,
+            String password,
+            String command) {
+
+        StringBuilder result = new StringBuilder();
+
+        Session session = null;
+        ChannelExec channel = null;
+
+        try {
+
+            JSch jsch = new JSch();
+
+            session =
+                    jsch.getSession(
+                            username,
+                            host,
+                            port);
+
+            session.setPassword(password);
+
+            session.setConfig(
+                    "StrictHostKeyChecking",
+                    "no");
+
+            session.connect(10000);
+
+            channel =
+                    (ChannelExec)
+                            session.openChannel("exec");
+
+            channel.setCommand(command);
+
+            InputStream in =
+                    channel.getInputStream();
+
+            channel.connect();
+
+            byte[] buffer = new byte[1024];
+
+            while (true) {
+
+                while (in.available() > 0) {
+
+                    int i =
+                            in.read(
+                                    buffer,
+                                    0,
+                                    1024);
+
+                    if (i < 0) {
+                        break;
+                    }
+
+                    result.append(
+                            new String(
+                                    buffer,
+                                    0,
+                                    i));
+                }
+
+                if (channel.isClosed()) {
+                    break;
+                }
+
+                Thread.sleep(100);
+            }
+
+        } catch (Exception ex) {
+
+            result.append(
+                    ex.getMessage());
+        } finally {
+
+            if (channel != null)
+                channel.disconnect();
+
+            if (session != null)
+                session.disconnect();
+        }
+
+        return result.toString();
+    }
+}

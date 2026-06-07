@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Dashboard</title>
+</head>
+
+<body>
+
+<h2>Asterisk Load Testing Dashboard</h2>
+
+
+<div>
+    <a href="/dashboard">Home</a> |
+    <a href="/duts">DUT Servers</a> |
+    <a href="/generators">Load Generators</a> |
+    <a href="/test-configs">Test Configurations</a> |
+    <a href="/campaigns">Campaign Management</a> |
+    <a href="/scenarios">Scenario Management</a> |
+    <a href="/monitor">Campaign Monitor</a> |
+    <a href="/users">Users</a> |
+    <a href="/logout">Logout</a>
+</div>
+
+<h3>Campaign Status</h3>
+
+<table border="1">
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Status</th>
+</tr>
+
+<tr th:each="c : ${campaigns}">
+<td th:text="${c.campaignId}"></td>
+<td th:text="${c.campaignName}"></td>
+<td th:text="${c.status}"></td>
+</tr>
+
+</table>
+
+<hr>
+
+<table border="1">
+
+<tr>
+    <td>Total DUTs</td>
+    <td th:text="${totalDuts}"></td>
+</tr>
+
+<tr>
+    <td>Total Generators</td>
+    <td th:text="${totalGenerators}"></td>
+</tr>
+
+<tr>
+    <td>Active Tests</td>
+    <td th:text="${activeTests}"></td>
+</tr>
+
+<tr>
+    <td>Running Calls</td>
+    <td th:text="${runningCalls}"></td>
+</tr>
+
+</table>
+
+
+
+</body>
+</html>
