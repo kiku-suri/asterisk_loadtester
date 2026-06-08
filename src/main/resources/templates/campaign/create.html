@@ -60,6 +60,29 @@
 
 </select>
 
+<label>Scenario</label>
+<select name="scenario" required>
+    <option value="">-- Select Scenario --</option>
+    <option th:each="s : ${scenarios}"
+            th:value="${s.scenarioId}"
+            th:text="${s.scenarioName}">
+    </option>
+</select>
+
+<label>Calls Per Second</label>
+<input type="number"
+       name="callsPerSecond"
+       min="1"
+       max="50"
+       required>
+
+<label>Total Calls</label>
+<input type="number"
+       name="totalCalls"
+       min="1"
+       max="500"
+       required>
+
 <br><br>
 
 <button type="submit">

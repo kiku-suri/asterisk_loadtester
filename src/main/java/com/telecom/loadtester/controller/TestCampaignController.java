@@ -6,6 +6,7 @@ import com.telecom.loadtester.repository.LoadGeneratorRepository;
 import com.telecom.loadtester.repository.TestConfigurationRepository;
 import com.telecom.loadtester.service.CampaignStatisticsService;
 import com.telecom.loadtester.service.SippStatisticsParserService;
+import com.telecom.loadtester.repository.ScenarioRepository;
 
 import com.telecom.loadtester.service.TestCampaignService;
 import com.telecom.loadtester.service.SippExecutionService;
@@ -26,11 +27,13 @@ public class TestCampaignController {
     private final SippExecutionService sippService;
     private final CampaignStatisticsService statisticsService;
     private final SippStatisticsParserService parserService;
+    private final ScenarioRepository scenarioRepository;
 
     public TestCampaignController(
             TestCampaignService service,
             DutServerRepository dutRepository,
 	    SippExecutionService sippService,
+	    ScenarioRepository scenarioRepository,
 	    SippStatisticsParserService parserService,
             LoadGeneratorRepository generatorRepository,
 	    CampaignStatisticsService statisticsService,
@@ -40,6 +43,7 @@ public class TestCampaignController {
         this.dutRepository = dutRepository;
 	this.sippService = sippService;
 	this.parserService = parserService;
+	this.scenarioRepository = scenarioRepository;
         this.generatorRepository = generatorRepository;
         this.configRepository = configRepository;
 	this.statisticsService = statisticsService;
@@ -75,6 +79,10 @@ public class TestCampaignController {
         model.addAttribute(
                 "configs",
                 configRepository.findAll());
+
+	model.addAttribute(
+		"scenarios", 
+		scenarioRepository.findAll());
 
         return "campaign/create";
     }
