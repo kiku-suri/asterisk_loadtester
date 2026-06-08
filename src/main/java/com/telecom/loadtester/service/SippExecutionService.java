@@ -1,12 +1,13 @@
 package com.telecom.loadtester.service;
 
-import com.telecom.loadtester.model.TestCampaign;
+/*import com.telecom.loadtester.model.TestCampaign;
 import com.telecom.loadtester.service.TestCampaignService;
 import com.telecom.loadtester.service.SippExecutionService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+*/
 
 import com.telecom.loadtester.model.*;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,13 @@ public class SippExecutionService {
                         + campaign.getCampaignId()
                         + ".csv";
 
+	String resultFile =
+        "/tmp/campaign_"
+                + campaign.getCampaignId()
+                + "_stats.csv";
+        
+	campaign.setResultFile(resultFile);
+
         DutServer dut =
                 campaign.getDutServer();
 
@@ -63,7 +71,7 @@ public class SippExecutionService {
                 + " -r " + campaign.getCallsPerSecond()
                 + " -m " + campaign.getTotalCalls()
                 + " -trace_stat "
-                + " -stf " + csvFile
+                + " -stf " + resultFile
                 + " > /tmp/sipp.log 2>&1 & "
                 + "echo $!";
 
@@ -129,4 +137,20 @@ public class SippExecutionService {
          return result.contains(
                  campaign.getSippPid());
     }
+
+	public String readStatisticsFile(
+ 	       TestCampaign campaign) {
+
+    	LoadGenerator generator =
+            campaign.getLoadGenerator();
+
+    	return sshService.executeCommand(
+            generator.getIpAddress(),
+            generator.getSshPort(),
+            generator.getSshUsername(),
+            generator.getSshPassword(),
+            "cat " + campaign.getResultFile());
+	}
+
+
 }

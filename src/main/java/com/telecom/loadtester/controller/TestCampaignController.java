@@ -4,9 +4,10 @@ import com.telecom.loadtester.model.TestCampaign;
 import com.telecom.loadtester.repository.DutServerRepository;
 import com.telecom.loadtester.repository.LoadGeneratorRepository;
 import com.telecom.loadtester.repository.TestConfigurationRepository;
-import com.telecom.loadtester.service.CampaignStatisticsService;
+//import com.telecom.loadtester.service.CampaignStatisticsService;
 import com.telecom.loadtester.service.SippStatisticsParserService;
 import com.telecom.loadtester.repository.ScenarioRepository;
+import com.telecom.loadtester.service.MetricsCollectionService;
 
 import com.telecom.loadtester.service.TestCampaignService;
 import com.telecom.loadtester.service.SippExecutionService;
@@ -25,9 +26,10 @@ public class TestCampaignController {
     private final LoadGeneratorRepository generatorRepository;
     private final TestConfigurationRepository configRepository;
     private final SippExecutionService sippService;
-    private final CampaignStatisticsService statisticsService;
+    //private final CampaignStatisticsService statisticsService;
     private final SippStatisticsParserService parserService;
     private final ScenarioRepository scenarioRepository;
+    private final MetricsCollectionService metricsService;
 
     public TestCampaignController(
             TestCampaignService service,
@@ -36,7 +38,8 @@ public class TestCampaignController {
 	    ScenarioRepository scenarioRepository,
 	    SippStatisticsParserService parserService,
             LoadGeneratorRepository generatorRepository,
-	    CampaignStatisticsService statisticsService,
+	    MetricsCollectionService metricsService,
+	    //CampaignStatisticsService statisticsService,
             TestConfigurationRepository configRepository) {
 
         this.service = service;
@@ -46,7 +49,8 @@ public class TestCampaignController {
 	this.scenarioRepository = scenarioRepository;
         this.generatorRepository = generatorRepository;
         this.configRepository = configRepository;
-	this.statisticsService = statisticsService;
+	this.metricsService = metricsService;
+	//this.statisticsService = statisticsService;
     }
 
     @GetMapping
@@ -136,6 +140,8 @@ public class TestCampaignController {
     campaign.setStartTime(
             LocalDateTime.now());
 
+    //metricsService.collectMetrics(campaign);
+
     service.save(campaign);
 
     return "redirect:/campaigns";
@@ -159,11 +165,19 @@ public class TestCampaignController {
             LocalDateTime.now());
         
 	String csvContent =
-            "200\n200\n200\n500\n200\n";
+            sippService.readStatisticsFile(campaign);
 
-        statisticsService.saveStatistics(
+		System.out.println("RESULT FILE = " + campaign.getResultFile());
+		System.out.println("CSV CONTENT = " + csvContent);
+
+		parserService.parseStatistics(
+        	campaign,
+        	csvContent);
+
+/*        statisticsService.saveStatistics(
             campaign,
             csvContent);
+*/
 
         parserService.parseStatistics(
             campaign,

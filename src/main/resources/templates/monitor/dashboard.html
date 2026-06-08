@@ -17,6 +17,27 @@
 
 <hr>
 
+<h3 class="section-title">DUT System Metrics</h3>
+
+<table>
+    <tr>
+        <th>Collected At</th>
+        <th>CPU %</th>
+        <th>Memory %</th>
+        <th>Load Avg</th>
+        <th>Active Calls</th>
+    </tr>
+
+    <tr th:each="m : ${metrics}">
+        <td th:text="${m.collectedAt}"></td>
+        <td th:text="${m.cpuUsage}"></td>
+        <td th:text="${m.memoryUsage}"></td>
+        <td th:text="${m.loadAverage}"></td>
+        <td th:text="${m.activeCalls}"></td>
+    </tr>
+</table>
+
+
 <table border="1">
 
 <tr>

@@ -1,6 +1,7 @@
 package com.telecom.loadtester.controller;
 
 import com.telecom.loadtester.model.TestCampaign;
+import com.telecom.loadtester.repository.SystemMetricsRepository;
 import com.telecom.loadtester.service.CampaignMonitoringService;
 import com.telecom.loadtester.service.TestCampaignService;
 
@@ -14,22 +15,21 @@ public class CampaignMonitorController {
 
     private final TestCampaignService campaignService;
     private final CampaignMonitoringService monitorService;
+    private final SystemMetricsRepository metricsRepository;
 
     public CampaignMonitorController(
             TestCampaignService campaignService,
-            CampaignMonitoringService monitorService) {
+            CampaignMonitoringService monitorService,
+            SystemMetricsRepository metricsRepository) {
 
         this.campaignService = campaignService;
         this.monitorService = monitorService;
+        this.metricsRepository = metricsRepository;
     }
 
     @GetMapping
     public String list(Model model) {
-
-        model.addAttribute(
-                "campaigns",
-                campaignService.findAll());
-
+        model.addAttribute("campaigns", campaignService.findAll());
         return "monitor/list";
     }
 
@@ -38,15 +38,13 @@ public class CampaignMonitorController {
             @PathVariable Long id,
             Model model) {
 
-        TestCampaign campaign =
-                campaignService.findById(id);
+        TestCampaign campaign = campaignService.findById(id);
 
+        model.addAttribute("campaign", campaign);
+        model.addAttribute("monitor", monitorService.getMonitorData(campaign));
         model.addAttribute(
-                "campaign", campaign);
-
-        model.addAttribute(
-                "monitor",
-                monitorService.getMonitorData(campaign));
+                "metrics",
+                metricsRepository.findByCampaignIdOrderByCollectedAtDesc(id));
 
         return "monitor/dashboard";
     }

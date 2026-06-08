@@ -1,46 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<link rel="stylesheet" href="/css/app.css">
-<title>Upload Scenario</title>
-</head>
 
-<div class="container">
+<head>
+    <title>Upload Scenario</title>
+    <link rel="stylesheet" href="/css/app.css">
+</head>
 
 <body>
 
 <div th:replace="~{fragments/layout :: header}"></div>
 
-<form
-        method="post"
-        enctype="multipart/form-data">
+<div class="container">
 
-    <label>Name</label>
-    <input type="text"
-           name="scenarioName"/>
+    <h2 class="page-title">Upload SIPp Scenario</h2>
 
-    <br/><br/>
+    <form action="/scenarios"
+          method="post"
+          enctype="multipart/form-data">
 
-    <label>Description</label>
-    <input type="text"
-           name="description"/>
+        <label>Scenario Name</label>
+        <input type="text"
+               name="scenarioName"
+               required>
 
-    <br/><br/>
+        <label>Description</label>
+        <textarea name="description"></textarea>
 
-    <label>XML File</label>
-    <input type="file"
-           name="file"/>
+        <label>Scenario XML File</label>
+        <input type="file"
+               name="file"
+               accept=".xml"
+               required>
 
-    <br/><br/>
+        <button class="btn" type="submit">
+            Upload
+        </button>
 
-    <button type="submit">
-        Upload
-    </button>
+        <a class="btn btn-secondary" href="/scenarios">
+            Back
+        </a>
 
-</form>
+    </form>
 
-<br/>
+</div>
 
 </body>
-</div>
 </html>
