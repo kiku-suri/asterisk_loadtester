@@ -4,6 +4,7 @@ import com.telecom.loadtester.model.TestCampaign;
 import com.telecom.loadtester.repository.SystemMetricsRepository;
 import com.telecom.loadtester.service.CampaignMonitoringService;
 import com.telecom.loadtester.service.TestCampaignService;
+import com.telecom.loadtester.service.MetricsCollectionService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,14 +17,17 @@ public class CampaignMonitorController {
     private final TestCampaignService campaignService;
     private final CampaignMonitoringService monitorService;
     private final SystemMetricsRepository metricsRepository;
+    private final MetricsCollectionService metricsService;
 
     public CampaignMonitorController(
             TestCampaignService campaignService,
             CampaignMonitoringService monitorService,
+	    MetricsCollectionService metricsService,
             SystemMetricsRepository metricsRepository) {
 
         this.campaignService = campaignService;
         this.monitorService = monitorService;
+	this.metricsService = metricsService;
         this.metricsRepository = metricsRepository;
     }
 
@@ -47,5 +51,17 @@ public class CampaignMonitorController {
                 metricsRepository.findByCampaignIdOrderByCollectedAtDesc(id));
 
         return "monitor/dashboard";
+    }
+
+    @GetMapping("/{id}/collect-metrics")
+	public String collectMetrics(
+        @PathVariable Long id) {
+
+    	TestCampaign campaign =
+            campaignService.findById(id);
+
+    	metricsService.collectMetrics(campaign);
+
+    	return "redirect:/monitor/" + id;
     }
 }

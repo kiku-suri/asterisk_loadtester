@@ -2,62 +2,102 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<link rel="stylesheet" href="/css/app.css">
-<title>Campaign Management</title>
+    <title>Campaign Management</title>
+    <link rel="stylesheet" href="/css/app.css">
 </head>
-
-<div class="container">
 
 <body>
 
 <div th:replace="~{fragments/layout :: header}"></div>
 
+<div class="container">
 
-<a href="/campaigns/new">Create Campaign</a>
+    <div class="page-header-row">
+        <h2 class="page-title">Campaign Management</h2>
 
-<br><br>
+        <a class="btn" href="/campaigns/new">
+            Create Campaign
+        </a>
+    </div>
 
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>DUT</th>
-        <th>Generator</th>
-        <th>Config</th>
-        <th>Scenario</th>
-        <th>Status</th>
-        <th>PID</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>Action</th>
-    </tr>
+    <table class="compact-table">
+        <tr>
+            <th>ID</th>
+            <th>Campaign</th>
+            <th>Target</th>
+            <th>Status</th>
+            <th>PID</th>
+            <th>Started</th>
+            <th>Ended</th>
+            <th>Actions</th>
+        </tr>
 
-    <tr th:each="c : ${campaigns}">
-        <td th:text="${c.campaignId}"></td>
-        <td th:text="${c.campaignName}"></td>
+        <tr th:each="c : ${campaigns}">
+            <td th:text="${c.campaignId}"></td>
 
-        <td th:text="${c.dutServer != null ? c.dutServer.serverName : '-'}"></td>
-        <td th:text="${c.loadGenerator != null ? c.loadGenerator.serverName : '-'}"></td>
-        <td th:text="${c.testConfiguration != null ? c.testConfiguration.testName : '-'}"></td>
-        <td th:text="${c.scenario != null ? c.scenario.scenarioName : '-'}"></td>
+            <td>
+                <strong th:text="${c.campaignName}"></strong>
+                <br>
+                <small>
+                    Scenario:
+                    <span th:text="${c.scenario != null ? c.scenario.scenarioName : '-'}"></span>
+                    |
+                    Config:
+                    <span th:text="${c.testConfiguration != null ? c.testConfiguration.testName : '-'}"></span>
+                </small>
+            </td>
 
-        <td th:text="${c.status}"></td>
-        <td th:text="${c.sippPid}"></td>
-        <td th:text="${c.startTime}"></td>
-        <td th:text="${c.endTime}"></td>
+            <td>
+                <span th:text="${c.dutServer != null ? c.dutServer.serverName : '-'}"></span>
+                <br>
+                <small>
+                    Generator:
+                    <span th:text="${c.loadGenerator != null ? c.loadGenerator.serverName : '-'}"></span>
+                </small>
+            </td>
 
-        <td>
-            <a th:href="@{/campaigns/start/{id}(id=${c.campaignId})}">Start</a>
-            |
-            <a th:href="@{/campaigns/stop/{id}(id=${c.campaignId})}">Stop</a>
-            |
-            <a th:href="@{/monitor/{id}(id=${c.campaignId})}">Monitor</a>
-            |
-            <a th:href="@{/statistics/{id}(id=${c.campaignId})}">Stats</a>
-        </td>
-    </tr>
-</table>
+            <td>
+                <span class="badge"
+                      th:classappend="${c.status == 'RUNNING'} ? ' badge-running' : ' badge-stopped'"
+                      th:text="${c.status}">
+                </span>
+            </td>
+
+            <td th:text="${c.sippPid != null ? c.sippPid : '-'}"></td>
+
+            <td>
+                <small th:text="${c.startTime != null ? c.startTime : '-'}"></small>
+            </td>
+
+            <td>
+                <small th:text="${c.endTime != null ? c.endTime : '-'}"></small>
+            </td>
+
+            <td class="actions">
+                <a class="btn btn-success"
+                   th:href="@{/campaigns/start/{id}(id=${c.campaignId})}">
+                    Start
+                </a>
+
+                <a class="btn btn-danger"
+                   th:href="@{/campaigns/stop/{id}(id=${c.campaignId})}">
+                    Stop
+                </a>
+
+                <a class="btn btn-secondary"
+                   th:href="@{/monitor/{id}(id=${c.campaignId})}">
+                    Monitor
+                </a>
+
+                <a class="btn btn-secondary"
+                   th:href="@{/statistics/{id}(id=${c.campaignId})}">
+                    Stats
+                </a>
+            </td>
+        </tr>
+    </table>
+
+</div>
 
 </body>
-</div>
 </html>

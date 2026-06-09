@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<link rel="stylesheet" href="/css/app.css">
+<title>Campaign Management</title>
+</head>
+
+<div class="container">
+
+<body>
+
+<div th:replace="~{fragments/layout :: header}"></div>
+
+
+<a href="/campaigns/new">Create Campaign</a>
+
+<br><br>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>DUT</th>
+        <th>Generator</th>
+        <th>Config</th>
+        <th>Scenario</th>
+        <th>Status</th>
+        <th>PID</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:each="c : ${campaigns}">
+        <td th:text="${c.campaignId}"></td>
+        <td th:text="${c.campaignName}"></td>
+
+        <td th:text="${c.dutServer != null ? c.dutServer.serverName : '-'}"></td>
+        <td th:text="${c.loadGenerator != null ? c.loadGenerator.serverName : '-'}"></td>
+        <td th:text="${c.testConfiguration != null ? c.testConfiguration.testName : '-'}"></td>
+        <td th:text="${c.scenario != null ? c.scenario.scenarioName : '-'}"></td>
+
+        <td th:text="${c.status}"></td>
+        <td th:text="${c.sippPid}"></td>
+        <td th:text="${c.startTime}"></td>
+        <td th:text="${c.endTime}"></td>
+
+        <td>
+            <a th:href="@{/campaigns/start/{id}(id=${c.campaignId})}">Start</a>
+            |
+            <a th:href="@{/campaigns/stop/{id}(id=${c.campaignId})}">Stop</a>
+            |
+            <a th:href="@{/monitor/{id}(id=${c.campaignId})}">Monitor</a>
+            |
+            <a th:href="@{/statistics/{id}(id=${c.campaignId})}">Stats</a>
+        </td>
+    </tr>
+</table>
+<br/>
+</body>
+</div>
+</html>

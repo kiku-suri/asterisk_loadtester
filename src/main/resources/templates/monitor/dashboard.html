@@ -1,82 +1,98 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<link rel="stylesheet" href="/css/app.css">
-<title>Campaign Monitor</title>
-
-<meta http-equiv="refresh" content="5">
-
+    <title>Campaign Monitor</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <meta http-equiv="refresh" content="10">
 </head>
-<div class="container">
 
 <body>
 
 <div th:replace="~{fragments/layout :: header}"></div>
 
-<a href="/campaigns">Back</a>
+<div class="container">
 
-<hr>
+    <div class="page-header-row">
+        <h2 class="page-title">Campaign Monitor</h2>
 
-<h3 class="section-title">DUT System Metrics</h3>
+        <div>
+            <a class="btn btn-secondary" href="/monitor">Back</a>
+            <a class="btn"
+               th:href="@{/monitor/{id}/collect-metrics(id=${campaign.campaignId})}">
+                Collect DUT Metrics
+            </a>
+        </div>
+    </div>
 
-<table>
-    <tr>
-        <th>Collected At</th>
-        <th>CPU %</th>
-        <th>Memory %</th>
-        <th>Load Avg</th>
-        <th>Active Calls</th>
-    </tr>
+    <div class="card-row">
+        <div class="card">
+            <div class="card-title">Campaign</div>
+            <div class="card-value" th:text="${campaign.campaignName}">-</div>
+        </div>
 
-    <tr th:each="m : ${metrics}">
-        <td th:text="${m.collectedAt}"></td>
-        <td th:text="${m.cpuUsage}"></td>
-        <td th:text="${m.memoryUsage}"></td>
-        <td th:text="${m.loadAverage}"></td>
-        <td th:text="${m.activeCalls}"></td>
-    </tr>
-</table>
+        <div class="card">
+            <div class="card-title">Status</div>
+            <div class="card-value" th:text="${monitor.status}">-</div>
+        </div>
 
+        <div class="card">
+            <div class="card-title">PID</div>
+            <div class="card-value" th:text="${monitor.pid}">-</div>
+        </div>
 
-<table border="1">
+        <div class="card">
+            <div class="card-title">CPS</div>
+            <div class="card-value" th:text="${monitor.cps}">0</div>
+        </div>
+    </div>
 
-<tr>
-    <td>Campaign</td>
-    <td th:text="${campaign.campaignName}"></td>
-</tr>
+    <h3 class="section-title">Call Status</h3>
 
-<tr>
-    <td>Status</td>
-    <td th:text="${monitor.status}"></td>
-</tr>
+    <div class="card-row">
+        <div class="card">
+            <div class="card-title">Active Calls</div>
+            <div class="card-value" th:text="${monitor.activeCalls}">0</div>
+        </div>
 
-<tr>
-    <td>PID</td>
-    <td th:text="${monitor.pid}"></td>
-</tr>
+        <div class="card">
+            <div class="card-title">Successful Calls</div>
+            <div class="card-value" th:text="${monitor.successfulCalls}">0</div>
+        </div>
 
-<tr>
-    <td>Active Calls</td>
-    <td th:text="${monitor.activeCalls}"></td>
-</tr>
+        <div class="card">
+            <div class="card-title">Failed Calls</div>
+            <div class="card-value" th:text="${monitor.failedCalls}">0</div>
+        </div>
+    </div>
 
-<tr>
-    <td>Successful Calls</td>
-    <td th:text="${monitor.successfulCalls}"></td>
-</tr>
+    <h3 class="section-title">DUT System Metrics</h3>
 
-<tr>
-    <td>Failed Calls</td>
-    <td th:text="${monitor.failedCalls}"></td>
-</tr>
+    <div class="table-wrapper">
+        <table>
+            <tr>
+                <th>Collected At</th>
+                <th>CPU %</th>
+                <th>Memory %</th>
+                <th>Load Avg</th>
+                <th>Active Calls</th>
+            </tr>
 
-<tr>
-    <td>CPS</td>
-    <td th:text="${monitor.cps}"></td>
-</tr>
+            <tr th:each="m : ${metrics}">
+                <td th:text="${m.collectedAt}"></td>
+                <td th:text="${m.cpuUsage}"></td>
+                <td th:text="${m.memoryUsage}"></td>
+                <td th:text="${m.loadAverage}"></td>
+                <td th:text="${m.activeCalls}"></td>
+            </tr>
 
-</table>
+            <tr th:if="${#lists.isEmpty(metrics)}">
+                <td colspan="5">No DUT metrics collected yet.</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
 
 </body>
-</div>
 </html>

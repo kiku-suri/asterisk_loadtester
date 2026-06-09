@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="/css/app.css">
+<title>Campaign Monitor</title>
+
+<meta http-equiv="refresh" content="5">
+
+</head>
+<div class="container">
+
+<body>
+
+<div th:replace="~{fragments/layout :: header}"></div>
+
+<a href="/campaigns">Back</a>
+
+<hr>
+
+<h3 class="section-title">DUT System Metrics</h3>
+
+<div class="table-wrapper">
+<table>
+    <tr>
+        <th>Collected At</th>
+        <th>CPU %</th>
+        <th>Memory %</th>
+        <th>Load Avg</th>
+        <th>Active Calls</th>
+    </tr>
+
+    <tr th:each="m : ${metrics}">
+        <td th:text="${m.collectedAt}"></td>
+        <td th:text="${m.cpuUsage}"></td>
+        <td th:text="${m.memoryUsage}"></td>
+        <td th:text="${m.loadAverage}"></td>
+        <td th:text="${m.activeCalls}"></td>
+    </tr>
+</table>
+</div>
+
+<div class="table-wrapper">
+<table border="1">
+
+<tr>
+    <td>Campaign</td>
+    <td th:text="${campaign.campaignName}"></td>
+</tr>
+
+<tr>
+    <td>Status</td>
+    <td th:text="${monitor.status}"></td>
+</tr>
+
+<tr>
+    <td>PID</td>
+    <td th:text="${monitor.pid}"></td>
+</tr>
+
+<tr>
+    <td>Active Calls</td>
+    <td th:text="${monitor.activeCalls}"></td>
+</tr>
+
+<tr>
+    <td>Successful Calls</td>
+    <td th:text="${monitor.successfulCalls}"></td>
+</tr>
+
+<tr>
+    <td>Failed Calls</td>
+    <td th:text="${monitor.failedCalls}"></td>
+</tr>
+
+<tr>
+    <td>CPS</td>
+    <td th:text="${monitor.cps}"></td>
+</tr>
+
+</table>
+</div>
+
+</body>
+</div>
+</html>
